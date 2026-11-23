@@ -1,0 +1,151 @@
+@import "tailwindcss";
+
+/*
+ * SJH Halal — Modern Enterprise Design Language
+ * Crisp slate canvas, pure white elevated cards, Otsuka Emerald brand accent,
+ * fluid typography, soft shadows, and clean borders.
+ */
+@theme {
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, "SFMono-Regular", monospace;
+
+  --color-paper: #f8fafc;
+  --color-paper-2: #f1f5f9;
+  --color-surface: #ffffff;
+  --color-ink: #0f172a;
+  --color-ink-2: #334155;
+  --color-ink-3: #64748b;
+  --color-line: #e2e8f0;
+  --color-line-2: #cbd5e1;
+
+  --color-accent: #059669;
+  --color-accent-2: #047857;
+  --color-accent-soft: #ecfdf5;
+
+  --color-brand-50: #ecfdf5;
+  --color-brand-100: #d1fae5;
+  --color-brand-200: #a7f3d0;
+  --color-brand-600: #059669;
+  --color-brand-700: #047857;
+  --color-brand-800: #065f46;
+  --color-brand-900: #064e3b;
+
+  --radius-ui: 10px;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  line-height: 1.55;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+::selection {
+  background-color: #a7f3d0;
+  color: #064e3b;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+@layer components {
+  .card {
+    @apply rounded-xl border border-slate-200/80 bg-white shadow-sm shadow-slate-900/5 transition-all;
+  }
+
+  .btn {
+    @apply inline-flex h-9 cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-slate-200 bg-white px-3.5 text-xs font-semibold text-slate-700 shadow-sm transition-all duration-150
+      hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900
+      active:scale-[0.98]
+      disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none disabled:active:scale-100;
+  }
+  .btn svg {
+    @apply size-4 shrink-0 stroke-[1.8];
+  }
+  .btn-primary {
+    @apply border-transparent bg-emerald-600 text-white shadow-sm shadow-emerald-700/20 hover:border-transparent hover:bg-emerald-700 hover:text-white active:bg-emerald-800;
+  }
+  .btn-accent {
+    @apply border-transparent bg-emerald-600 text-white shadow-sm shadow-emerald-700/20 hover:border-transparent hover:bg-emerald-700 hover:text-white active:bg-emerald-800;
+  }
+  .btn-danger {
+    @apply border-transparent bg-red-600 text-white shadow-sm shadow-red-700/20 hover:border-transparent hover:bg-red-700 active:bg-red-800;
+  }
+  .btn-danger-ghost {
+    @apply border-transparent bg-transparent text-red-600 shadow-none hover:border-red-200 hover:bg-red-50 hover:text-red-700;
+  }
+  .btn-ghost {
+    @apply border-transparent bg-transparent text-slate-600 shadow-none hover:border-transparent hover:bg-slate-100 hover:text-slate-900;
+  }
+  .btn-sm {
+    @apply h-7.5 rounded-md px-2.5 text-[11.5px];
+  }
+
+  .input {
+    @apply h-9 w-full rounded-lg border border-slate-200 bg-white px-3 text-xs text-slate-800 transition-all
+      placeholder:text-slate-400
+      hover:border-slate-300
+      focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20
+      disabled:bg-slate-50 disabled:text-slate-400
+      aria-invalid:border-red-500 aria-invalid:ring-red-500/20;
+  }
+  textarea.input {
+    @apply h-auto py-2 leading-relaxed;
+  }
+  select.input {
+    @apply cursor-pointer appearance-none bg-no-repeat pr-8;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%2364748b' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-position: right 0.75rem center;
+  }
+
+  .label {
+    @apply mb-1.5 block text-xs font-semibold text-slate-700;
+  }
+  .hint {
+    @apply mt-1 text-[11.5px] leading-snug text-slate-500;
+  }
+
+  .th {
+    @apply whitespace-nowrap border-b border-slate-200 bg-slate-50/80 px-3.5 py-2.5 text-left text-[11px] font-bold uppercase tracking-wider text-slate-500;
+  }
+  .td {
+    @apply border-b border-slate-100 px-3.5 py-3 align-middle text-xs text-slate-700;
+  }
+  .link {
+    @apply font-semibold text-emerald-600 underline-offset-2 transition-colors hover:text-emerald-700 hover:underline;
+  }
+  .code {
+    @apply font-mono text-[11.5px] font-medium tracking-tight text-slate-600;
+  }
+  .num {
+    @apply tabular-nums font-medium;
+  }
+
+  .kbd {
+    @apply inline-flex h-5 min-w-5 items-center justify-center rounded border border-slate-200 bg-slate-50 px-1 font-mono text-[10px] font-medium text-slate-500 shadow-xs;
+  }
+  .skeleton {
+    @apply animate-pulse rounded-md bg-slate-200/70;
+  }
+  .eyebrow {
+    @apply text-[11px] font-bold uppercase tracking-wider text-emerald-700;
+  }
+  mark.hl {
+    @apply rounded-[3px] bg-amber-200/80 px-0.5 text-inherit font-medium;
+  }
+
+  /* Sembunyikan Next.js floating dev indicator overlay */
+  nextjs-portal,
+  [data-nextjs-toast],
+  [data-nextjs-dialog-overlay] {
+    display: none !important;
+  }
+}
