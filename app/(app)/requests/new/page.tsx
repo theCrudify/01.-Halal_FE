@@ -12,10 +12,10 @@ export const metadata: Metadata = { title: "Request Baru" };
 
 export default async function NewRequestPage({ searchParams }: PageProps<"/requests/new">) {
   await requireUser();
-  const meta = await getMeta();
   const materialId = Number((await searchParams).material_id) || null;
   const s = await getServices();
-  const [material, suppliers, manufacturers, products, lines, departments] = await Promise.all([
+  const [meta, material, suppliers, manufacturers, products, lines, departments] = await Promise.all([
+    getMeta(),
     materialId ? s.materials.get(materialId) : null,
     s.suppliers.options(),
     s.manufacturers.options(),

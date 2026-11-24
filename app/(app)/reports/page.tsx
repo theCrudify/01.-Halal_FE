@@ -14,9 +14,8 @@ export const metadata: Metadata = { title: "Laporan berkala" };
 
 export default async function ReportsPage({ searchParams }: PageProps<"/reports">) {
   await requireUser();
-  const meta = await getMeta();
   const params = await searchParams;
-  const result = await (await getServices()).reports.list(params);
+  const [meta, result] = await Promise.all([getMeta(), (await getServices()).reports.list(params)]);
   const columns = columnsFor<Row>(meta, "reports", {
     report_type: { render: (r) => <Link className="link" href={`/reports/${r.id}`}>{meta.name("report_types", r.report_type)}</Link> },
     plant: { className: "whitespace-nowrap text-ink-2", render: (r) => meta.plantLabel(r.plant) },

@@ -16,9 +16,8 @@ export const metadata: Metadata = { title: "Master list halal" };
 
 export default async function MaterialsPage({ searchParams }: PageProps<"/materials">) {
   await requireUser();
-  const meta = await getMeta();
   const params = await searchParams;
-  const result = await (await getServices()).materials.list(params);
+  const [meta, result] = await Promise.all([getMeta(), (await getServices()).materials.list(params)]);
   const nonExpiring = (code?: string) => meta.get("halal_bodies", code)?.requires_expiry === false;
   const scope =
     params.category === "__none"

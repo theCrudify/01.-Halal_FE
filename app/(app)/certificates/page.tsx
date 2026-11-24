@@ -14,9 +14,8 @@ export const metadata: Metadata = { title: "Sertifikat halal produk" };
 
 export default async function CertificatesPage({ searchParams }: PageProps<"/certificates">) {
   await requireUser();
-  const meta = await getMeta();
   const params = await searchParams;
-  const result = await (await getServices()).certificates.list(params);
+  const [meta, result] = await Promise.all([getMeta(), (await getServices()).certificates.list(params)]);
   const columns = columnsFor<Row>(meta, "certificates", {
     certificate_number: { render: (r, q) => <Link className="link code" href={`/certificates/${r.id}`}><Hl text={r.certificate_number} q={q} /></Link> },
     products: { render: (r, q) => <span className="line-clamp-2 max-w-80"><Hl text={r.product_names} q={q} />{r.scope_note && <span className="block text-xs text-ink-3">{r.scope_note}</span>}</span> },

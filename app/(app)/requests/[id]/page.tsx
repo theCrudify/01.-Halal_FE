@@ -56,10 +56,9 @@ function Stepper({ meta, status, step }: { meta: Meta; status: string; step: num
 
 export default async function RequestDetailPage({ params, searchParams }: PageProps<"/requests/[id]">) {
   await requireUser();
-  const meta = await getMeta();
   const id = Number((await params).id);
   const s = await getServices();
-  const r = await s.requests.get(id);
+  const [meta, r] = await Promise.all([getMeta(), s.requests.get(id)]);
   const d = r.data;
   const live = r.material;
   const isChange = r.request_type === "Change";

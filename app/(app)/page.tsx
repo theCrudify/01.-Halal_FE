@@ -64,10 +64,9 @@ const PLANT_COLORS: Record<string, string> = {
 
 export default async function DashboardPage() {
   const user = await requireUser();
-  const meta = await getMeta();
-  const reviewer = meta.can("request.view_all");
   const s = await getServices();
-  const d = await s.dashboard.summary();
+  const [meta, d] = await Promise.all([getMeta(), s.dashboard.summary()]);
+  const reviewer = meta.can("request.view_all");
   const w = d.windowCodes;
   const expiringHref = (code?: string | null, extra = "") => (code ? `/materials?expiry=${code}&is_active=true${extra}` : "/materials?is_active=true");
 

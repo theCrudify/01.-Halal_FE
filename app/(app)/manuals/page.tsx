@@ -14,9 +14,8 @@ export const metadata: Metadata = { title: "Manual SJPH" };
 
 export default async function ManualsPage({ searchParams }: PageProps<"/manuals">) {
   await requireUser();
-  const meta = await getMeta();
   const params = await searchParams;
-  const result = await (await getServices()).manuals.list(params);
+  const [meta, result] = await Promise.all([getMeta(), (await getServices()).manuals.list(params)]);
   const columns = columnsFor<Row>(meta, "manuals", {
     doc_number: { render: (r, q) => <Link className="link code" href={`/manuals/${r.id}`}><Hl text={r.doc_number} q={q} /></Link> },
     title: { render: (r, q) => <Hl text={r.title} q={q} /> },

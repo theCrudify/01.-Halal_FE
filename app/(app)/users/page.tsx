@@ -17,11 +17,10 @@ export const metadata: Metadata = { title: "Users & role" };
 
 export default async function UsersPage({ searchParams }: PageProps<"/users">) {
   const me = await requireUser();
-  const meta = await getMeta();
   const query = await searchParams;
   const s = await getServices();
   const editId = Number(query.edit) || null;
-  const [result, departments, editing] = await Promise.all([s.users.list(query), s.departments.options(), editId ? s.users.get(editId) : null]);
+  const [meta, result, departments, editing] = await Promise.all([getMeta(), s.users.list(query), s.departments.options(), editId ? s.users.get(editId) : null]);
   const showForm = !!editing || query.new === "1";
   const closeHref = hrefWith("/users", query, { edit: undefined, new: undefined });
 

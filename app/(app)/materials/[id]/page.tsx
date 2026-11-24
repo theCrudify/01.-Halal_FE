@@ -31,8 +31,7 @@ function certificateHealth(meta: Meta, m: any) {
 
 export default async function MaterialDetailPage({ params }: PageProps<"/materials/[id]">) {
   await requireUser();
-  const meta = await getMeta();
-  const m = await (await getServices()).materials.get(Number((await params).id));
+  const [meta, m] = await Promise.all([getMeta(), (await getServices()).materials.get(Number((await params).id))]);
   const open = m.requests.find((r: any) => meta.isOpen(r.status));
   const health = certificateHealth(meta, m);
   const releaseCode = meta.terminal("release")?.code;

@@ -10,9 +10,8 @@ import { requireUser } from "@/lib/session";
 
 export default async function ManualDetailPage({ params }: PageProps<"/manuals/[id]">) {
   await requireUser();
-  const meta = await getMeta();
   const s = await getServices();
-  const [m, departments] = await Promise.all([s.manuals.get(Number((await params).id)), s.departments.options()]);
+  const [meta, m, departments] = await Promise.all([getMeta(), s.manuals.get(Number((await params).id)), s.departments.options()]);
   const canEdit = meta.can("manual.manage");
   return (
     <>
