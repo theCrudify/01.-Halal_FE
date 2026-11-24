@@ -111,8 +111,8 @@ export default async function LoginPage({
         </section>
 
         {/* Right Authentication Panel */}
-        <main className="flex items-center justify-center bg-paper px-6 py-12 lg:px-14">
-          <div className="w-full max-w-md">
+        <main className="flex items-center justify-center bg-paper px-6 py-8 lg:px-12 lg:py-10">
+          <div className="w-full max-w-[460px]">
             {/* Mobile Header (Only visible on small screens) */}
             <div className="mb-6 flex items-center gap-3 lg:hidden">
               <span className="grid size-10 place-items-center rounded-lg bg-emerald-700 text-sm font-black text-white">
@@ -125,11 +125,11 @@ export default async function LoginPage({
             </div>
 
             {/* Main Auth Card */}
-            <div className="rounded-2xl border border-line bg-surface p-7 sm:p-9 shadow-sm shadow-emerald-950/5">
-              <div className="mb-6">
+            <div className="rounded-2xl border border-line bg-surface p-6 sm:p-8 shadow-sm shadow-emerald-950/5">
+              <div className="mb-5">
                 <h2 className="text-2xl font-bold tracking-tight text-ink">Selamat Datang</h2>
                 <p className="mt-1 text-xs text-ink-3">
-                  Masuk ke sistem atau gunakan bypass akun master di bawah ini.
+                  Masuk ke sistem atau gunakan akses cepat di bawah ini.
                 </p>
               </div>
 
